@@ -1,0 +1,82 @@
+#include <bits/stdc++.h>
+using namespace std;
+int sz = 0;
+class Node
+{
+
+public:
+    int val;
+    Node *next;
+    Node(int val)
+    {
+        this->val = val;
+        this->next = NULL;
+    }
+};
+
+void insert_tail(Node *head, Node *tail, int val)
+{
+    Node *newnode = new Node(val);
+
+    if (head == NULL)
+    {
+        head = newnode;
+        tail = newnode;
+        return;
+    }
+    tail->next = newnode;
+    tail = newnode;
+}
+
+int main()
+{
+
+    Node *head1 = NULL;
+    Node *tail1 = NULL;
+    int n;
+    cin >> n;
+    for (int i = 0; i < n; i++)
+    {
+        int val;
+        cin >> val;
+        insert_tail(head1, tail1, val);
+    }
+    Node *head2 = NULL;
+    Node *tail2 = NULL;
+    int n;
+    cin >> n;
+    for (int i = 0; i < n; i++)
+    {
+        int val;
+        cin >> val;
+        insert_tail(head2, tail2, val);
+    }
+
+    Node* tmp1 = head1;
+    int sz1 =0;
+    while(tmp1!= 0)
+    {
+        sz1++;
+        tmp1 = tmp1->next;
+    }
+    cout<<sz1<<endl;
+   
+    Node* tmp2 = head2;
+    int sz2 =0;
+    while(tmp1!=0)
+    {
+        sz2++;
+        tmp2 = tmp2->next;
+    }
+    cout<<sz2<<endl;
+
+    if(sz1!=sz2)
+    {
+      cout << "Not Same - directly size mismatch" << endl;
+    }
+    else
+    {
+          cout << "Same - directly size match" << endl;
+    }
+    return 0;
+}
