@@ -1,0 +1,65 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+     list<string> l;
+     string s;
+     while( cin >>s)
+     {
+        if(s=="end")
+        {
+            break;
+        }
+        l.push_back(s);
+     }
+     int x;
+     cin>>x;
+     auto cur = l.begin();
+     while(x--)
+     {
+        string cmd;
+        cin>>cmd;
+        if(cmd=="visit")
+        {
+            string addr;
+            cin>>addr;
+            auto it = find(l.begin(),l.end(),addr);
+            if(it!=l.end())
+            {
+                cur =it;
+                cout<<*cur<<endl;
+            }
+            else{
+                cout<<"Not Available"<<endl;
+            }
+        }
+        else if(cmd=="next")
+        {
+            auto tmp = cur;
+            tmp++;
+             if(tmp!=l.end())
+            {
+                cur =tmp;
+                cout<<*cur<<endl;
+            }
+            else{
+                cout<<"Not Available"<<endl;
+            }
+        }
+        else if(cmd=="prev")
+        {
+           
+             if(cur!=l.begin())
+            {
+                cur--;
+                cout<<*cur<<endl;
+            }
+            else{
+                cout<<"Not Available"<<endl;
+            }
+        }
+        
+
+     }
+    return 0;
+}
