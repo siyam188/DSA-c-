@@ -1,0 +1,143 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class Node
+{
+public:
+    int val;
+    Node *next;
+    Node *prev;
+    Node(int val)
+    {
+        this->val = val;
+        this->next = NULL;
+        this->prev = NULL;
+    }
+};
+
+int listSize(Node* head)
+{
+    int cnt =0;
+    while(head)
+    {
+        cnt++;
+        head = head->next;
+    }
+    return cnt;
+
+}
+void insert_head(Node* & head, Node* &tail, int val)
+ {
+    Node *newnode = new Node(val);
+    if (head == NULL) {
+        head = newnode;
+        tail = newnode;
+        return;
+    }
+
+    newnode->next = head;
+    head->prev = newnode;
+    head = newnode;
+
+}
+void insert_tail(Node* &head, Node* &tail, int val) {
+    Node *newnode = new Node (val);
+
+    if (head == NULL) {
+        head = newnode;
+        tail = newnode;
+        return;
+    }
+
+    tail->next = newnode;
+    newnode->prev = tail;
+    tail = newnode;
+}
+
+void insert_any_position(Node* &head, Node* &tail, int idx, int val) 
+{
+    if (idx == 0) {
+        insert_head(head, tail, val);
+        return;
+    }
+
+    Node *tmp = head;
+    for(int i=1; i<idx; i++) {
+        if (tmp == NULL) break;
+        tmp = tmp->next;
+    }
+
+    Node* newnode = new Node(val);
+    newnode->next = tmp->next;
+    newnode->prev = tmp;
+    if(tmp->next!= NULL)
+    {
+        tmp->next->prev = newnode;
+    }
+    tmp->next = newnode;
+
+    if(newnode->next == NULL)
+    {
+        tail = newnode;
+    }
+  }
+       
+void printf_left(Node* head)
+{
+    cout<< "L -> ";
+    while(head)
+    {
+        cout<<head->val<< " ";
+        head = head->next;
+    }
+    cout<<endl;
+}
+void printf_Right(Node* tail)
+{
+    cout<< "R -> ";
+    while(tail)
+    {
+        cout<<tail->val<< " ";
+        tail = tail->prev;
+    }
+    cout<<endl;
+}
+
+
+int main()
+{
+    Node *head = NULL;
+    Node *tail = NULL;
+
+    int query;
+    cin >> query;
+    while (query--)
+    {
+        int idx, val;
+        cin >> idx >> val;
+        int sz = listSize(head);
+        if (idx < 0 || idx > sz)
+        {
+           cout<<"Invalid"<<endl;
+        }
+        else
+        {
+           
+            if (idx == sz)
+            {
+                insert_tail(head,tail,val);
+ 
+            }
+            
+            else
+            {
+
+          insert_any_position(head,tail,idx,val);
+        }
+        printf_left(head);
+        printf_Right(tail);
+    }
+
+}
+    return 0;
+}
