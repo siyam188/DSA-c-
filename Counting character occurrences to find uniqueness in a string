@@ -1,0 +1,24 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+   string s;
+   cin>>s;
+   int fre[26] ={0};
+    int a = s.size();
+    for(int i =0;i<a;i++)
+    {
+        fre[s[i]-'a']++;
+    }
+    for(int i =0;i<a;i++)
+    {
+         if(fre[s[i]-'a'] == 1);
+         {
+            cout<<s[i];
+            return 0;
+         }
+    
+    }
+    cout<<-1;
+    return 0;
+}
