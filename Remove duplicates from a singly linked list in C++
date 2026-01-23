@@ -1,0 +1,64 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class Node
+{
+public:
+    int val;
+    Node* next;
+
+    Node(int val)
+    {
+        this->val = val;
+        this->next = NULL;
+    }
+};
+
+int main()
+{
+    Node* head = NULL;
+    Node* tail = NULL;
+    int val;
+    while (cin >> val && val != -1)
+    {
+        Node* newNode = new Node(val);
+        if (head == NULL)
+        {
+            head = tail = newNode;
+        }
+        else
+        {
+            tail->next = newNode;
+            tail = newNode;
+        }
+    }
+
+    Node* temp2= head;
+    while (temp2 != NULL)
+    {
+        Node* temp = temp2;
+        while (temp->next != NULL)
+        {
+            if (temp->next->val == temp2->val)
+            {
+                Node* del = temp->next;
+                temp->next = del->next;
+                delete del;
+            }
+            else
+            {
+                temp = temp->next;
+            }
+        }
+        temp2 = temp2->next;
+    }
+
+    Node* temp = head;
+    while (temp != NULL)
+    {
+        cout << temp->val << " ";
+        temp = temp->next;
+    }
+
+    return 0;
+}
